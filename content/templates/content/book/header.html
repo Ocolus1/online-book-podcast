@@ -1,0 +1,366 @@
+<nav class="bg-white h-[60px] border-b">
+	<div class="ml-5">
+		<div class="flex h-16 items-center justify-between">
+			<div class="flex items-center">
+				<div class="flex-shrink-0">
+					<a
+						class="flex items-center transition filter hover:opacity-70 hover:drop-shadow-sm active:opacity-50"
+						href="/"
+					>
+						<img
+							alt="The Network State Logo"
+							src="https://thenetworkstate.com/images/thenetworkstate-153628bc033ae112b16ba78ba7bf9393.svg?vsn=d"
+						/>
+					</a>
+				</div>
+			</div>
+			<div class="hidden md:block">
+				<div class="ml-4 flex items-center md:ml-6">
+					<div
+						class="text-white bg-[#006DFF] rounded-md m-2 items-center justify-center flex"
+					>
+						<span class="mx-1 my-[2px] text-[10px] font-bold"
+							>NEW</span
+						>
+					</div>
+					<a
+						class="flex text-black decoration-none justify-start items-center"
+						href="/podcast"
+					>
+						<span class="font-bold font-size-17">Podcast</span>
+					</a>
+					<div class="w-4"></div>
+
+					<div class="relative" x-data="{ open: false }">
+						<button
+							@click="open = !open"
+							type="button"
+							class="book_btn flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+							aria-expanded="false"
+						>
+							<span class="font-bold font-size-17">Book</span>
+							<svg
+								class="h-5 w-5 flex-none text-gray-400"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</button>
+
+						<div
+							x-show="open"
+							@click.away="open = false"
+							class="book_drop absolute right-0 top-full z-50 mt-3 w-72  max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
+						>
+							<div class="p-2">
+								<div
+									class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+								>
+									
+									<div class="flex-auto">
+										<a
+											href="/book/1"
+											class="block font-semibold text-gray-900"
+										>
+											The Network State
+											<span
+												class="absolute inset-0"
+											></span>
+										</a>
+									</div>
+								</div>
+								<div
+									class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+								>
+									
+									<div class="flex-auto">
+										<a
+											href="/book/2"
+											class="block font-semibold text-gray-900"
+										>
+											Analytics
+											<span
+												class="absolute inset-0"
+											></span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Profile dropdown -->
+					<div class="relative ml-3">
+						<div>
+							<button
+								type="button"
+								class="relative max-w-xs w-[40px] h-[40px] my-0 mx-1 mr-3.5 rounded-full border border-full text-[18px] border-gray-300 bg-white flex justify-center items-center"
+								id="user-menu-button"
+								aria-expanded="false"
+								aria-haspopup="true"
+							>
+								<span class="sr-only">Open user menu</span>
+								<img
+									src="https://thenetworkstate.com/images/kebab-horizontal.svg"
+								/>
+							</button>
+						</div>
+						<div
+							class="hidden transform opacity-0 scale-95 transition ease-out duration-100 absolute right-0 z-50 mt-2 w-72 origin-top-right rounded-md bg-white py-1 px-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+							role="menu"
+							aria-orientation="vertical"
+							id="user-menu-tray"
+							aria-labelledby="user-menu-button"
+							tabindex="-1"
+						>
+							<a
+								class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+								role="menuitem"
+								tabindex="-1"
+								id="user-menu-item-0"
+								href="/reviews"
+							>
+								<img
+									src="https://thenetworkstate.com/images/reviews.svg"
+								/>
+								<span>Reviews</span>
+							</a>
+							<a
+								class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+								role="menuitem"
+								tabindex="-1"
+								id="user-menu-item-1"
+								href="/dashboard"
+							>
+								<img
+									src="https://thenetworkstate.com/images/dashboard.svg"
+								/>
+								<span>Dashboard</span>
+							</a>
+							<a
+								class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+								role="menuitem"
+								tabindex="-1"
+								id="user-menu-item-2"
+								href="https://twitter.com/thenetworkstate"
+								target="_blank"
+							>
+								<img
+									alt="Twitter Logo"
+									src="https://thenetworkstate.com/images/twitter.svg"
+								/>
+								<span>Twitter</span>
+							</a>
+							<a
+								class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+								role="menuitem"
+								tabindex="-1"
+								id="user-menu-item-3"
+								href="/archive"
+							>
+								<img
+									src="https://thenetworkstate.com/images/archive.svg"
+								/>
+								<span>Archive</span>
+							</a>
+							<a
+								class="flex text-white py-2 my-2 bg-black border-transparent font-semibold text-md decoration-none rounded-xl items-baseline justify-center"
+								href="/subscribe"
+							>
+								<span class="my-[2px]">Subscribe</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="-mr-2 flex md:hidden">
+				<!-- Mobile menu button -->
+				<button
+					type="button"
+					class="relative max-w-xs w-[40px] h-[40px] my-0 mx-1 mr-3.5 rounded-full border border-full text-[18px] border-gray-300 bg-white flex justify-center items-center"
+					aria-controls="mobile-menu"
+					aria-expanded="false"
+				>
+					<img
+						src="https://thenetworkstate.com/images/kebab-horizontal.svg"
+					/>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Mobile menu, show/hide based on menu state. -->
+	<div
+		class="hidden transform opacity-0 scale-95 transition ease-out duration-100 absolute w-full top-[45px] z-50 bg-white py-1 text-black md:hidden"
+		id="mobile-menu"
+	>
+		<div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+			<a href="#" class="block font-semibold py-2 text-md text-black">
+				<div class="flex justify-start items-center space-x-3">
+					<img
+						src="https://thenetworkstate.com/images/mic-menu.svg"
+					/>
+					<div class="my-1">Podcast</div>
+					<div
+						class="text-white bg-[#006DFF] rounded-md m-2 items-center justify-center flex"
+					>
+						<span class="mx-1 my-[2px] text-[10px] font-bold">
+							NEW
+						</span>
+					</div>
+				</div>
+			</a>
+			<a
+				href="#"
+				class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+			>
+				<img src="https://thenetworkstate.com/images/book-menu-1.svg" />
+				<span>Book</span>
+			</a>
+		</div>
+		<div class="border-t border-gray-700 pb-3 pt-1">
+			<div class="mt-3 space-y-1 px-2">
+				<a
+					class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+					href="/reviews"
+				>
+					<img src="https://thenetworkstate.com/images/reviews.svg" />
+					<span>Reviews</span>
+				</a>
+				<a
+					class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+					href="/dashboard"
+				>
+					<img
+						src="https://thenetworkstate.com/images/dashboard.svg"
+					/>
+					<span>Dashboard</span>
+				</a>
+				<a
+					class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+					href="https://twitter.com/thenetworkstate"
+					target="_blank"
+				>
+					<img
+						alt="Twitter Logo"
+						src="https://thenetworkstate.com/images/twitter.svg"
+					/>
+					<span>Twitter</span>
+				</a>
+				<a
+					class="flex justify-start items-center space-x-3 font-semibold py-2 text-md text-black"
+					href="/archive"
+				>
+					<img src="https://thenetworkstate.com/images/archive.svg" />
+					<span>Archive</span>
+				</a>
+				<a
+					class="flex text-white py-2 my-2 bg-black border-transparent font-semibold text-md decoration-none rounded-xl items-baseline justify-center"
+					href="/subscribe"
+				>
+					<span class="my-[2px]">Subscribe</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</nav>
+{% block script %}
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		// Profile Dropdown
+		const userMenuButton = document.getElementById('user-menu-button');
+		const userMenu = document.querySelector('#user-menu-tray');
+
+		userMenuButton.addEventListener('click', () => {
+			userMenu.classList.toggle('hidden');
+		});
+
+		// Mobile Menu
+		const mobileMenuButton = document.querySelector(
+			'[aria-controls="mobile-menu"]'
+		);
+		const mobileMenu = document.getElementById('mobile-menu');
+		mobileMenuButton.addEventListener('click', () => {
+			mobileMenu.classList.toggle('hidden');
+		});
+
+		document
+			.getElementById('user-menu-button')
+			.addEventListener('click', function () {
+				let dropdown = document.querySelector('#user-menu-tray');
+
+				if (dropdown.classList.contains('opacity-0')) {
+					// Show the dropdown
+					dropdown.classList.remove('opacity-0', 'scale-95');
+					dropdown.classList.add('opacity-100', 'scale-100');
+				} else {
+					// Hide the dropdown
+					dropdown.classList.remove('opacity-100', 'scale-100');
+					dropdown.classList.add('opacity-0', 'scale-95');
+				}
+			});
+
+		document
+			.querySelector('[aria-controls="mobile-menu"]')
+			.addEventListener('click', function () {
+				let dropdown = document.getElementById('mobile-menu');
+
+				if (dropdown.classList.contains('opacity-0')) {
+					// Show the dropdown
+					dropdown.classList.remove('opacity-0', 'scale-95');
+					dropdown.classList.add('opacity-100', 'scale-100');
+				} else {
+					// Hide the dropdown
+					dropdown.classList.remove('opacity-100', 'scale-100');
+					dropdown.classList.add('opacity-0', 'scale-95');
+				}
+			});
+
+		// Get the button and the dropdown menu
+		const button = document.querySelector('.book_btn');
+		const dropdownMenu = document.querySelector('.book_drop');
+
+		// Initial state
+		dropdownMenu.style.opacity = '0';
+		dropdownMenu.style.transform = 'translateY(-1rem)';
+		dropdownMenu.style.transition =
+			'opacity 150ms ease-in, transform 150ms ease-in';
+
+		button.addEventListener('click', function () {
+			const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+			if (isExpanded) {
+				// Hide the dropdown with the "Leaving" transition
+				dropdownMenu.style.opacity = '0';
+				dropdownMenu.style.transform = 'translateY(-1rem)';
+				this.setAttribute('aria-expanded', 'false');
+			} else {
+				// Show the dropdown with the "Entering" transition
+				dropdownMenu.style.opacity = '1';
+				dropdownMenu.style.transform = 'translateY(0)';
+				this.setAttribute('aria-expanded', 'true');
+				dropdownMenu.style.transition =
+					'opacity 200ms ease-out, transform 200ms ease-out';
+			}
+		});
+
+		// Close the dropdown when clicking outside
+		document.addEventListener('click', function (event) {
+			if (
+				!button.contains(event.target) &&
+				!dropdownMenu.contains(event.target)
+			) {
+				dropdownMenu.style.opacity = '0';
+				dropdownMenu.style.transform = 'translateY(-1rem)';
+				button.setAttribute('aria-expanded', 'false');
+			}
+		});
+	});
+</script>
+{% endblock script %}

@@ -1,0 +1,221 @@
+{% load my_extras %}
+<style>
+	.gYCFYZ {
+		width: 100%;
+		max-width: calc(min(100vw, 682px));
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-align-items: center;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: space-around;
+		-webkit-justify-content: space-around;
+		-ms-flex-pack: space-around;
+		justify-content: space-around;
+		box-sizing: border-box;
+		margin-top: 8px;
+	}
+
+	.fafcIY {
+		background-color: #e2e2e2;
+		border-radius: 24px;
+		height: 4px;
+		margin: 0 4px;
+		position: relative;
+	}
+
+	.fafcIY:first-child {
+		margin-left: 0;
+		border-radius: 0 24px 24px 0;
+	}
+
+	.jYJsaL {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: black;
+		height: 4px;
+	}
+
+	.fafcIY .progress {
+		border-radius: 24px;
+	}
+
+	.middler {
+		width: calc(min(100vw, 682px));
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+
+	.drop_div {
+		width: calc(min(100vw, 382px));
+	}
+	.list-none {
+		list-style-type: none;
+		list-style-position: outside;
+		padding-left: 0px;
+	}
+
+	.link {
+		color: black;
+	}
+</style>
+<header class="relative bg-white">
+	<nav class="fixed top-0 left-0 right-0 w-full mt-0 bg-white py-3 px-1 md:px-4">
+		<div class="flex flex-row items-center justify-between">
+			<div class="text-white md:hidden">.</div>
+			<div class="hidden md:block md:items-center ">
+				<div class="flex-shrink-0">
+					<a
+						class="flex items-center transition filter hover:opacity-70 hover:drop-shadow-sm active:opacity-50"
+						href="/"
+					>
+						<img
+							alt="The Network State Logo"
+							src="https://thenetworkstate.com/images/thenetworkstate-153628bc033ae112b16ba78ba7bf9393.svg?vsn=d"
+						/>
+					</a>
+				</div>
+			</div>
+			<div class="middler">
+				<div class="text-center">
+					<h4 class="m-0">{{ chapter.category_text }}</h4>
+					<p class="m-0 text-sm font-extralight text-slate-600">
+						{{ chapter.title }}
+					</p>
+					<div class="pt-2">
+						<div class="sc-iqcoie gYCFYZ">
+							{% for i in range_categories %}
+								{% if chapter.category_id == i %}
+									<div class="sc-crXcEl fafcIY" style="flex: {{ category_flex_values|get_value_from_dict:i }} 1 0%">
+										<div class="sc-evZas jYJsaL progress" style="width: {{ progress_percentage }}%"></div>
+									</div>
+								{% elif chapter.category_id > i %}
+									<div class="sc-crXcEl fafcIY" style="flex: {{ category_flex_values|get_value_from_dict:i }} 1 0%">
+										<div class="sc-evZas jYJsaL progress" style="width: 100%"></div>
+									</div>
+								{% else %}
+									<div class="sc-crXcEl fafcIY" style="flex: {{ category_flex_values|get_value_from_dict:i }} 1 0%">
+										<div class="sc-evZas jYJsaL progress" style="width: 0%"></div>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="items-center flex md:ml-6">
+				<!-- Profile dropdown -->
+				<div class="relative md:ml-3">
+					<div>
+						<button
+							type="button"
+							class="relative max-w-xs w-[40px] h-[40px] my-0 mx-1 md:mr-3.5 rounded-full border border-full text-[18px] border-gray-300 bg-white flex justify-center items-center"
+							id="user-menu-button"
+							aria-expanded="false"
+							aria-haspopup="true"
+							aria-controls="mobile-menu"
+						>
+							<span class="sr-only">Open user menu</span>
+							<img
+								src="https://thenetworkstate.com/images/kebab-horizontal.svg"
+							/>
+						</button>
+					</div>
+					<div
+						class="drop_div hidden transform opacity-0 scale-95 transition ease-out duration-100 absolute overflow-y-auto right-0 z-50 mt-2 origin-top-right rounded-md bg-white py-4  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+						style="min-height: 75vh;max-height: 75vh"
+						role="menu"
+						aria-orientation="vertical"
+						id="user-menu-tray"
+						aria-labelledby="user-menu-button"
+						tabindex="-1"
+					>
+						<div class="max-h-max pt-6 p-4 text-black">
+							<div class="flex flex-row space-x-3">
+								<div>
+									<img 
+										width="129"
+										height="202"
+										class="cursor-pointer shadow-lg border-gray-200"
+										src="{{ book.cover_image.url }}"
+									/>
+								</div>
+								<div class="flex flex-col justify-between">
+									<div>
+										<h3 class="m-0 font-bold text-md">{{book.title}}</h3>
+										<p class="m-0 font-extralight text-slate-600 text-sm">{{book.author}}</p>
+									</div>
+									<div class="mb-3">
+									
+										<a
+											class="bg-black text-white rounded-full py-2 px-2 flex items-center space-x-2"
+											href="{{ book.amazon_url }}"
+											target="_blank"
+										>
+											<img
+												style="filter: invert(100%);"
+												src="https://thenetworkstate.com/images/amazon-sm.svg"
+											/>
+											<span>Buy on Amazon</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-lg">
+							<a class="link block border mb-0" style="padding: 1rem" href="/">
+								Home
+							</a>
+							<ul class="list-none mt-0">
+								{% for category_id, chapters in grouped_chapters.items %}
+									{% with first_chapter=chapters|first %}
+									
+									<!-- If t.his is the last group -->
+									{% if forloop.last %}
+										<li class="list-none border-t border-l border-r">
+									{% else %}
+										<li class="list-none border">
+									{% endif %}
+									
+										<a href="/book/{{ id }}/{{ first_chapter.slug }}" 
+										class="link block font-bold text-xl" style="padding: 1.3rem 1rem">
+											{{ first_chapter.category_id }}. {{ first_chapter.category_text }}
+										</a>
+										
+										<!-- Chapters within the Category -->
+										<ul class="list-none">
+											{% for chapter in chapters %}
+											
+											<!-- If this is the last chapter of the last group -->
+											{% if forloop.last and forloop.parentloop.last %}
+												<li class="p-4 border-t border-l border-r">
+											{% else %}
+												<li class="p-4 border">
+											{% endif %}
+											
+												<a class="link" href="/book/{{ id }}/{{ chapter.slug }}">
+													{{ chapter.title }}
+												</a>
+											</li>
+											{% endfor %}
+										</ul>
+									</li>
+									{% endwith %}
+								{% endfor %}
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>

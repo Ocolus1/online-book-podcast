@@ -1,0 +1,82 @@
+{% extends './section_base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ chapter.title }}
+{% endblock title %}
+
+
+{% block body %}
+<style>
+    .chapter-line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 20px 0; /* or whatever spacing you want around the line */
+    }
+
+    .line {
+        flex: 1;
+        height: 1px; /* thickness of your line */
+        background-color: #000; /* color of your line */
+    }
+
+    .chapter-text {
+        margin: 0 10px; /* spacing around the text */
+    }
+
+</style>
+{% include './section_header.html' %}
+<main class="max-w-2xl mx-auto" style="margin-top: 5.5rem">
+{% with sequence_str=chapter.sequence_number|stringformat:".1f" %}
+    {% if sequence_str|slice:"-1:" == "0" %}
+        {% if chapter.category_id != 6 %}
+            {% with img_name=chapter.category_id|stringformat:"s"|add:".png" %}
+            <img src="{% static 'content/img/'|add:img_name %}" />
+            {% endwith %}
+        {% endif %}
+        <h1 class="m-0 text-center text-5xl font-bold">{{ chapter.category_text }}</h1>
+        <div class="chapter-line">
+            <div class="line"></div>
+            <p class="chapter-text">Chapter {{ chapter.category_id }}</p>
+            <div class="line"></div>
+        </div>
+    {% endif %}
+{% endwith %}
+
+	<div class="pb-5">
+		<div>{{ chapter.content|safe }}</div>
+	</div>
+</main>
+
+{% if chapter.next_chapter %}
+<hr />
+<div class="max-w-2xl mx-auto">
+    <div class="mt-6 mb-4 py-5">
+        <div class="flex flex-row justify-between items-center font-serif">
+            <div class="flex flex-col justify-center">
+                <h4 class="m-0 font-bold">Next Section:</h4>
+                {% with sequence_str=chapter.next_chapter.sequence_number|stringformat:".1f" %}
+                    {% if sequence_str|slice:"-1:" == "0" %}
+                        <p class="m-0 text-slate-700 font-light text-sm">{{ chapter.next_chapter.category_text }}</p>
+                    {% else %}
+                        <p class="m-0 text-slate-700 font-light text-sm">{{ chapter.next_chapter.title }}</p>
+                    {% endif %}
+                {% endwith %}
+
+
+
+            </div>
+            <a href="/book/{{id}}/{{chapter.next_chapter.slug}}" class="flex items-center justify-between px-5 py-2 text-white font-bold bg-black rounded-full">
+                Next 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 font-bold">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock body %}

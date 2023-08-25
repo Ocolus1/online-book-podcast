@@ -1,0 +1,134 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{% block title %} {% endblock title %}</title>
+		{% tailwind_css %}
+		<style>
+            body {
+                font-family: "Valkyrie B";
+            }
+
+			blockquote,
+			dl,
+			dd,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			figure,
+			p,
+			pre {
+				margin: 1em 0;
+			}
+
+			/* Reverting lists */
+			ol,
+			ul {
+				list-style: disc outside;
+				padding-left: 2em;
+				margin: 1em 0;
+			}
+			ol ol,
+			ol ul,
+			ul ol,
+			ul ul {
+				margin-bottom: 0;
+				margin-top: 0;
+			}
+			li {
+				list-style-position: outside;
+			}
+			ol {
+				list-style-type: decimal;
+			}
+
+			/* Reverting images */
+			img {
+				border-style: none;
+			}
+            h1, h2, h3, h4, h5, h6 {
+                font-size: revert;
+                font-weight: revert;
+            }
+
+            img, svg, video, canvas, audio, iframe, embed, object {
+                display: inline;
+                vertical-align: baseline;
+            }
+
+            a {
+                color: rgb(30, 131, 210);
+            }
+
+            p  {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+		</style>
+	</head>
+	<body class="h-full pt-0 mt-0">
+        
+		{% block body %} {% endblock body %} 
+        {% block script %} {% endblock script %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Profile Dropdown
+                const userMenuButton = document.getElementById('user-menu-button');
+                const userMenu = document.querySelector('#user-menu-tray');
+
+                userMenuButton.addEventListener('click', () => {
+                    userMenu.classList.toggle('hidden');
+                });
+                
+                // Mobile Menu
+                const mobileMenuButton = document.querySelector(
+                    '[aria-controls="mobile-menu"]'
+                    );
+                const mobileMenu = document.getElementById('mobile-menu');
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                document
+                    .getElementById('user-menu-button')
+                    .addEventListener('click', function () {
+                        let dropdown = document.querySelector('#user-menu-tray'); 
+
+                        if (dropdown.classList.contains('opacity-0')) {
+                            // Show the dropdown
+                            dropdown.classList.remove('opacity-0', 'scale-95');
+                            dropdown.classList.add('opacity-100', 'scale-100');
+                        } else {
+                            // Hide the dropdown
+                            dropdown.classList.remove('opacity-100', 'scale-100');
+                            dropdown.classList.add('opacity-0', 'scale-95');
+                        }
+                    });
+                    
+                document
+                    .querySelector('[aria-controls="mobile-menu"]')
+                    .addEventListener('click', function () {
+                        let dropdown = document.getElementById('mobile-menu'); 
+
+                        if (dropdown.classList.contains('opacity-0')) {
+                            // Show the dropdown
+                            dropdown.classList.remove('opacity-0', 'scale-95');
+                            dropdown.classList.add('opacity-100', 'scale-100');
+                        } else {
+                            // Hide the dropdown
+                            dropdown.classList.remove('opacity-100', 'scale-100');
+                            dropdown.classList.add('opacity-0', 'scale-95');
+                        }
+                    });
+            });
+        </script>	
+	</body>
+</html>
