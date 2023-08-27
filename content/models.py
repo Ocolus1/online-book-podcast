@@ -31,11 +31,3 @@ class BookChapter(models.Model):
 
     def __str__(self):
         return f"{self.book.title} - {self.title} - {self.slug} - {self.sequence_number}"
-
-class Podcast(models.Model):
-    title = models.CharField(max_length=200)
-    video_url = models.URLField()
-    transcript = models.TextField()
-    youtube_url = models.URLField(blank=True, null=True)
-    apple_url = models.URLField(blank=True, null=True)
-    spotify_url = models.URLField(blank=True, null=True)
