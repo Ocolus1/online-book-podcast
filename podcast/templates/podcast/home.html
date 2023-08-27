@@ -1,0 +1,131 @@
+{% extends './base.html' %} {% load static %} 
+{% block title %} Podcast {% endblock title %} {% block body %}
+
+<main class="max-w-2xl mx-auto" style="margin-top: 4.5rem">
+	<div class="pb-5">
+		<div>
+			<article class="relative w-full" style="height: 24rem">
+				<iframe
+					style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						width: 100%;
+					"
+                    class="rounded-xl"
+					src="https://www.youtube.com/embed/pnhx3h35tl4?iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&autoplay=1&mute=1&color=white"
+					frameborder="0"
+					allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+				></iframe>
+			</article>
+		</div>
+        <div class="text-center mt-4">
+            <h1 class="font-bold" style="font-size: 3.5rem">The Network State Podcast </h1>
+            <p class="font-extralight text-slate-400 text-2xl" style="font-size: 1.2rem">
+                Balaji talks to founders and policymakers from around 
+                the world on managing millions of people, investing 
+                billions of dollars, and building a new kind of country: the network state.
+            </p>
+        </div>
+        <div class="mt-6">
+            {% for podcast in podcasts %}
+                <div class="border-t">
+                    <a href="episode/{{podcast.slug}}" style="margin: 1.3rem 0" >
+                        <div class="flex flex-row space-x-4 ">
+                            <div class="">
+                                <img src="{{podcast.thumbnail_image.url}}"
+                                    class="border rounded-xl max-w-xs"
+                                />
+                            </div>
+                            <div class="flex flex-col items-start justify-around">
+                                <div class="font-bold text-lg mb-4">#{{podcast.sequence_number}} - {{podcast.title}}</div>
+                                <div class="font-extralight text-slate-400 date-element" data-date="{{podcast.creation_date}}"></div>
+                                <div class="flex flex-row justify-start h-9 space-x-5" style="margin-bottom: 2rem;">
+                                    <span class="">
+                                        <a href="{{podcast.youtube_url}}" target="_blank">
+                                            <img 
+                                                class="h-9 w-9 p-2 rounded-lg bg-slate-100"
+                                                src="https://framerusercontent.com/images/Dwd4G8UWiiawuxR22iklyOan2Yc.png"
+                                            />
+                                        </a>
+                                    </span>
+                                    <span class="">
+                                        <a href="{{podcast.apple_url}}" target="_blank">
+                                            <img 
+                                                class="h-9 w-9 p-2 rounded-lg bg-slate-100"
+                                                src="https://framerusercontent.com/images/suk3svTOQqIqdgvYgFDr5V6tIU.png"
+                                            />
+                                        </a>
+                                    </span>
+                                    <span class="">
+                                        <a href="{{podcast.spotify_url}}" target="_blank">
+                                            <img 
+                                                class="h-9 w-9 p-2 rounded-lg bg-slate-100"
+                                                src="https://framerusercontent.com/images/3Jvwp9SJx0lZ3vCU3R8wOmuFVo.png"
+                                            />
+                                        </a>
+                                    </span>
+                                    <span class="px-2 bg-slate-50 rounded-lg">
+                                        <a href="episode/{{podcast.slug}}" 
+                                            class="flex flex-nowrap mt-2 space-x-2"
+                                            style="margin-top: 5px;"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                                focusable="false" viewBox="0 0 24 24" 
+                                                color="var(--token-7d0456d4-0096-466d-b64d-ce0a15b3410d, rgb(0, 109, 255)) /* {&quot;name&quot;:&quot;Blue&quot;} */" 
+                                                style="user-select: none; width: 1.55rem; height: 1.55rem; display: inline-block; fill: var(--token-7d0456d4-0096-466d-b64d-ce0a15b3410d, rgb(0, 109, 255)); flex-shrink: 0; cursor: auto;">
+                                                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path>
+                                            </svg>
+                                            <span class="text-blue-600 font-bold"> Transcript</span>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+	</div>
+</main>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateElements = document.querySelectorAll('.date-element');
+
+        dateElements.forEach(el => {
+            const dateStr = el.getAttribute('data-date');
+            const formattedDate = formatDate(dateStr);
+            el.innerText = formattedDate;
+        });
+        function formatDate(inputStr) {
+            // First, clean the string and remove unwanted periods
+            const cleanedStr = inputStr.replace(/\./g, "");
+
+            // Parse the date string into a Date object
+            const parsedDate = new Date(cleanedStr);
+
+            // If the date is invalid, return the original string
+            if (isNaN(parsedDate)) return inputStr;
+
+            // Create an array of month names
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+
+            // Get the day, month, and year from the Date object
+            const day = parsedDate.getDate();
+            const month = monthNames[parsedDate.getMonth()];
+            const year = parsedDate.getFullYear();
+
+            // Return the formatted string
+            return `${month} ${day}, ${year}`;
+        }
+    });
+</script>
+{% endblock script%}

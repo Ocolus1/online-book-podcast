@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'content',
+    'podcast',
     'ckeditor',
     'ckeditor_uploader',
     'tailwind',

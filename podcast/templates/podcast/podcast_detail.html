@@ -1,0 +1,114 @@
+{% extends './base.html' %} {% load static %} 
+{% block title %} Podcast - {{podcast.title}} {% endblock title %} {% block body %}
+
+<main class="max-w-xl mx-auto" style="margin-top: 4.5rem">
+	<div>
+		<h1 class="font-bold text-2xl">#{{podcast.sequence_number}} - {{podcast.title}} </h1>
+		<p class="date-element my-6 font-extralight text-slate-800" data-date="{{podcast.creation_date}}"></p>
+		<p class="flex flex-row justify-start h-12 mb-4">
+			<span class="mr-4">
+				<a href="{{podcast.youtube_url}}" target="_blank">
+					<img 
+						class="h-10 w-10 p-2 rounded-full bg-slate-200"
+						src="https://framerusercontent.com/images/Dwd4G8UWiiawuxR22iklyOan2Yc.png"
+					/>
+				</a>
+			</span>
+			<span class="mr-4">
+				<a href="{{podcast.apple_url}}" target="_blank">
+					<img 
+						class="h-10 w-10 p-2 rounded-full bg-slate-200"
+						src="https://framerusercontent.com/images/suk3svTOQqIqdgvYgFDr5V6tIU.png"
+					/>
+				</a>
+			</span>
+			<span class="mr-4">
+				<a href="{{podcast.spotify_url}}" target="_blank">
+					<img 
+						class="h-10 w-10 p-2 rounded-full bg-slate-200"
+						src="https://framerusercontent.com/images/3Jvwp9SJx0lZ3vCU3R8wOmuFVo.png"
+					/>
+				</a>
+			</span>
+		</p>
+	</div>
+	<div class="pb-5">
+		<div>
+			<article class="relative w-full" style="height: 20rem">
+				<iframe
+                    id="player"
+					style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						width: 100%;
+					"
+					class="rounded-xl"
+					src='https://www.youtube.com/embed/{{ podcast.video_id }}?iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&autoplay=1&mute=1&color=white'
+					frameborder="0"
+					allow="fullscreen; accelerometer; encrypted-media; gyroscope; picture-in-picture"
+				></iframe> 
+			</article>
+		</div>
+		<div id="hidden-div" class="mt-8 bg-slate-100 p-2 rounde-2xl flex justify-between md:mx-1">
+			This transcript of the podcast was auto-generated and may include typos
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="times w-6 h-6 hover:cursor-pointer">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</div>
+        <div class="mt-8">
+            <div id="transcriptContainer" style="height: 300px; overflow-y: scroll;">
+                    <div class="transcript-entry">
+						{{podcast.transcript|safe}}
+                    </div>
+            </div>
+        </div>
+	</div>
+</main>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const hidMe = document.getElementById('hidden-div');
+        const hidDiv = document.querySelector('.times');
+
+        hidDiv.addEventListener('click', (event) => {
+            hidMe.classList.add('hidden');
+        });
+
+		const dateElement = document.querySelector('.date-element');
+
+		const dateStr = dateElement.getAttribute('data-date');
+		const formattedDate = formatDate(dateStr);
+		dateElement.innerText = formattedDate;
+        function formatDate(inputStr) {
+            // First, clean the string and remove unwanted periods
+            const cleanedStr = inputStr.replace(/\./g, "");
+
+            // Parse the date string into a Date object
+            const parsedDate = new Date(cleanedStr);
+
+            // If the date is invalid, return the original string
+            if (isNaN(parsedDate)) return inputStr;
+
+            // Create an array of month names
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+
+            // Get the day, month, and year from the Date object
+            const day = parsedDate.getDate();
+            const month = monthNames[parsedDate.getMonth()];
+            const year = parsedDate.getFullYear();
+
+            // Return the formatted string
+            return `${month} ${day}, ${year}`;
+        }
+    });
+</script>
+
+{% endblock script %}

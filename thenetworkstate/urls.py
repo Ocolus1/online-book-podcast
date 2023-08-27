@@ -7,6 +7,7 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('', include('content.urls')),
+    path('podcast/', include('podcast.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 
