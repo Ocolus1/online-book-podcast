@@ -22,3 +22,15 @@ class Podcast(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.slug} - {self.sequence_number}"
+    
+class DashboardModel(models.Model):
+    name = models.CharField(max_length=200)
+    mission = models.TextField(blank=True, null=True)
+    logo = models.ImageField(upload_to='dashboard/logo/', blank=True, null=True)
+    website_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    discord_url = models.URLField(blank=True, null=True)
+    join_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}"
