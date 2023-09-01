@@ -1,0 +1,87 @@
+{% extends '../base.html' %} {% load static %} 
+{% block title %} Archive {% endblock title %} {% block body %}
+
+<style>
+	.wrapper {
+		width: calc(min(100%, 1200px));
+	}
+</style>
+<main class="wrapper px-4 mt-4 md:mt-20 mx-auto">
+	<div class="" style="margin-bottom: 2.5rem">
+		<h1 class="font-bold" style="font-size: 2.1rem">Content Archive</h1>
+		<p>A collection of content from The Network State.</p>
+	</div>
+	<div>
+		{% for acrhive in archives %}
+		<div class="my-4">
+			<figure
+				class="p-4 transition ease-out duration-300 rounded hover:sm:saturate-110 hover:sm:brightness-105 hover:cursor-pointer sm:p-0  sm:shadow-lg hover:shadow-2xl group"
+			>
+				<div class="flex flex-row">
+					<a class="flex flex-1" href="archive/archive/{{acrhive.slug}}">
+						<img
+							class="sm:rounded-l object-cover h-full max-h-44"
+							src="{{ acrhive.thumbnail.url }}"
+						/>
+					</a>
+					<div
+						class="sm:flex-1 sm:flex sm:flex-col sm:px-6 space-y-1 sm:pt-6 sm:pb-6"
+					>
+						<div class="">
+							<div class="flex flex-row flex-wrap">
+								<div class="space-y-2 mr-2">
+									<div class="inline-block">
+										<div
+											class="flex flex-row items-center space-x-2 text-sm uppercase tracking-wide"
+										>
+											<a
+												class="filter hover:brightness-105 font-bold text-gray-500 transition duration-300 ease-in-out"
+												href="archive/{{acrhive.slug}}"
+											>
+                                                {% for tag in acrhive.tags.all %}
+                                                    <span class="the-network-state">{{tag.name}}</span>
+                                                {% endfor %}
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h1
+							class="font-serif tracking-tighter my-1 sm:my-4 text-2xl font-bold transition-colors group-hover:text-gray-600"
+						>
+							<a
+								class="hover:text-gray-600"
+								href="archive/{{acrhive.slug}}"
+								>{{acrhive.title}}</a
+							>
+						</h1>
+						<a
+							class="block leading-snug sm:leading-normal font-serif my-1 sm:my-2 text-gray-600transition-colors group-hover:text-gray-500"
+							href="archive/{{acrhive.slug}}"
+						>
+							<p
+								class="antialiased optimize-legibility text-gray-700 text-lg leading-snug"
+							>
+								{{acrhive.description}}
+							</p>
+						</a>
+						<a
+							class="flex flex-1 sm:hidden py-2"
+							href="/{acrhive.slug}}"
+						>
+							<img
+								class="rounded object-cover h-full"
+								loading="lazy"
+								src="https://content.1729.com/content/images/size/w600/2021/11/joshua-sortino-LqKhnDzSF-8-unsplash.jpg"
+							/>
+						</a>
+					</div>
+				</div>
+			</figure>
+		</div>
+		{% endfor %}
+	</div>
+</main>
+
+{% endblock body %}

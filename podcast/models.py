@@ -34,3 +34,24 @@ class DashboardModel(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+
+class ArchiveTags(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+class Archive(models.Model):
+    slug = AutoSlugField(populate_from='title', unique=True)
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    profile_pic = models.ImageField(upload_to='archive/profile/', blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='archive/thumbnail/', blank=True, null=True)
+    content = RichTextField()
+    tags = models.ManyToManyField(ArchiveTags, related_name="archives", blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.slug}"

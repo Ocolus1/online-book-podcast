@@ -1,0 +1,61 @@
+{% extends './archive_base.html' %} {% load static %} 
+{% block title %} Archive - {{archive.title}} {% endblock title %} {% block body %}
+{% include "./archive_header.html" %}
+<main class="max-w-xl mx-auto" >
+	<div>
+		<h1 class="font-normal text-5xl italic m-0 mb-3"> {{archive.title}} </h1>
+		<p class="font-bold text-2xl m-0 mb-5"> {{archive.description}} </p>
+		<hr />
+		<div class="flex flex-row items-center space-x-3 mt-3 font-extralight text-gray-600">
+			<img src={{archive.profile_pic.url}} class="rounded-full h-10 w-10" />
+			<div>
+				<h3 class="m-0">{{archive.author}}</h3>
+				<p class="date-element text-sm m-0" data-date="{{archive.creation_date}}"></p>
+			</div>
+		</div>
+	</div>
+    <div class="pb-5">
+		<div>{{ archive.content|safe }}</div>
+	</div>
+	
+</main>
+
+{% endblock body %}
+
+
+{% block script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateElements = document.querySelector('.date-element');
+
+        
+		const dateStr = dateElements.getAttribute('data-date');
+		const formattedDate = formatDate(dateStr);
+		dateElements.innerText = formattedDate;
+        function formatDate(inputStr) {
+            // First, clean the string and remove unwanted periods
+            const cleanedStr = inputStr.replace(/\./g, "");
+
+            // Parse the date string into a Date object
+            const parsedDate = new Date(cleanedStr);
+
+            // If the date is invalid, return the original string
+            if (isNaN(parsedDate)) return inputStr;
+
+            // Create an array of month names
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+
+            // Get the day, month, and year from the Date object
+            const day = parsedDate.getDate();
+            const month = monthNames[parsedDate.getMonth()];
+            const year = parsedDate.getFullYear();
+
+            // Return the formatted string
+            return `${month} ${day}, ${year}`;
+        }
+    });
+</script>
+{% endblock script%}

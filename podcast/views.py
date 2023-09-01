@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Podcast, DashboardModel
+from .models import Podcast, DashboardModel, Archive
 import re
 import requests
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -33,3 +33,21 @@ def dashboard(request):
         'dashboardList': dashboardList
     }
     return render(request, "podcast/dashboard.html", content)
+
+
+def archive_list(request):
+    archives = Archive.objects.all().order_by("-id")
+    
+    content = {
+        'archives': archives
+    }
+    return render(request, "podcast/archive/home.html", content)
+
+
+def archive_detail(request, archive_slug):
+    archive = Archive.objects.filter(slug=archive_slug).first()
+    
+    content = {
+        'archive': archive
+    }
+    return render(request, "podcast/archive/archive_detail.html", content)

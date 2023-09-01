@@ -1,0 +1,82 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{% block title %} {% endblock title %}</title>
+		{% tailwind_css %}
+		<style>
+            body {
+                font-family: "Valkyrie B";
+            }
+
+			blockquote,
+			dl,
+			dd,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			figure,
+			p,
+			pre {
+				margin: 1em 0;
+			}
+
+			/* Reverting lists */
+			ol,
+			ul {
+				list-style: disc outside;
+				padding-left: 2em;
+				margin: 1em 0;
+			}
+			ol ol,
+			ol ul,
+			ul ol,
+			ul ul {
+				margin-bottom: 0;
+				margin-top: 0;
+			}
+			li {
+				list-style-position: outside;
+			}
+			ol {
+				list-style-type: decimal;
+			}
+
+			/* Reverting images */
+			img {
+				border-style: none;
+			}
+            h1, h2, h3, h4, h5, h6 {
+                font-size: revert;
+                font-weight: revert;
+            }
+
+            img, svg, video, canvas, audio, iframe, embed, object {
+                display: inline;
+                vertical-align: baseline;
+            }
+
+            a {
+                color: rgb(30, 131, 210);
+            }
+
+            p  {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+		</style>
+	</head>
+	<body class="h-full pt-0 mt-0">
+        
+		{% block body %} {% endblock body %} 
+        {% block script %} {% endblock script %}
+	</body>
+</html>
