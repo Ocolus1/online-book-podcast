@@ -6,6 +6,15 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound, VideoUnavailable
 from datetime import datetime
 import json
+from django.conf import settings
+import tweepy
+
+# Set your API keys and tokens
+consumer_key = settings.TWITTER_CONSUMER_KEY
+consumer_secret = settings.TWITTER_CONSUMER_SECRET
+access_token = settings.TWITTER_ACCESS_TOKEN
+access_token_secret = settings.TWITTER_ACCESS_TOKEN_SECRET
+bearer_token = settings.TWITTER_BEARER_TOKEN
 
 
 def home(request):
@@ -33,6 +42,11 @@ def dashboard(request):
         'dashboardList': dashboardList
     }
     return render(request, "podcast/dashboard.html", content)
+
+
+def reviews(request):
+    
+    return render(request, "podcast/review.html")
 
 
 def archive_list(request):
